@@ -16,7 +16,7 @@ resource "snowflake_database" "prod_db" {
 }
 
 resource "snowflake_warehouse" "warehouse" {
-  name           = "TF_DEMO"
+  name           = "east_health_small_engine"
   warehouse_size = "small"
   auto_suspend   = 60
 }
@@ -43,7 +43,7 @@ resource "snowflake_grant_privileges_to_role" "database_grant" {
 
 resource "snowflake_schema" "schema" {
   database   = snowflake_database.prod_db.name
-  name       = "TF_DEMO"
+  name       = "RAW"
   is_managed = false
 }
 
