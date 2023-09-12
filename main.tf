@@ -12,7 +12,11 @@ provider "snowflake" {
 }
 
 resource "snowflake_database" "prod_db" {
-  name = "EAST_HEALTH_PROD_DB"
+  name = var.prod_db_name
+}
+
+resource "snowflake_database" "prod_test" {
+  name = var.test_db_name
 }
 
 resource "snowflake_warehouse" "warehouse" {
