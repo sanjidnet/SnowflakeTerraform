@@ -11,8 +11,8 @@ provider "snowflake" {
   role = "SYSADMIN"
 }
 
-resource "snowflake_database" "db" {
-  name = "TF_DEMO"
+resource "snowflake_database" "prod_db" {
+  name = "EAST_HEALTH_PROD_DB"
 }
 
 resource "snowflake_warehouse" "warehouse" {
@@ -37,12 +37,12 @@ resource "snowflake_grant_privileges_to_role" "database_grant" {
   role_name  = snowflake_role.role.name
   on_account_object {
     object_type = "DATABASE"
-    object_name = snowflake_database.db.name
+    object_name = snowflake_database.prod_db.name
   }
 }
 
 resource "snowflake_schema" "schema" {
-  database   = snowflake_database.db.name
+  database   = snowflake_database.prod_db.name
   name       = "TF_DEMO"
   is_managed = false
 }
@@ -52,7 +52,7 @@ resource "snowflake_grant_privileges_to_role" "schema_grant" {
   privileges = ["USAGE"]
   role_name  = snowflake_role.role.name
   on_schema {
-    schema_name = "\"${snowflake_database.db.name}\".\"${snowflake_schema.schema.name}\""
+    schema_name = "\"${snowflake_database.prod_db.name}\".\"${snowflake_schema.schema.name}\""
   }
 }
 
@@ -76,7 +76,7 @@ resource "snowflake_user" "user" {
     name              = "tf_demo_user"
     default_warehouse = snowflake_warehouse.warehouse.name
     default_role      = snowflake_role.role.name
-    default_namespace = "${snowflake_database.db.name}.${snowflake_schema.schema.name}"
+    default_namespace = "${snowflake_database.prod_db.name}.${snowflake_schema.schema.name}"
     rsa_public_key    = substr(tls_private_key.svc_key.public_key_pem, 27, 398)
 }
 
