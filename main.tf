@@ -15,8 +15,20 @@ resource "snowflake_database" "prod_db" {
   name = var.prod_db_name
 }
 
-resource "snowflake_database" "prod_test" {
+resource "snowflake_database" "test_db" {
   name = var.test_db_name
+}
+
+resource "snowflake_database" "dev_db_jc" {
+  name = var.dev_db_jc_name
+}
+
+resource "snowflake_database" "dev_db_jj" {
+  name = var.dev_db_jj_name
+}
+
+resource "snowflake_database" "dev_db_mg" {
+  name = var.dev_db_mg_name
 }
 
 resource "snowflake_warehouse" "warehouse" {
