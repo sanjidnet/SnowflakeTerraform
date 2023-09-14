@@ -19,9 +19,9 @@ If you want to learn more about creating good readme files then refer the follow
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)
 
-::: mermaid
+```mermaid
 sequenceDiagram
     Christie->>Josh: Hello Josh, how are you?
     Josh-->>Christie: Great!
     Christie->>Josh: See you later!
-:::
+```
