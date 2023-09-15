@@ -1,18 +1,16 @@
 terraform {
-  cloud {
-    organization = "EastHealth"
-
-    workspaces {
-      name = "gh-actions"
-    }
-  }
-}
-
-terraform {
   required_providers {
     snowflake = {
       source  = "Snowflake-Labs/snowflake"
       version = "~> 0.68"
+    }
+  }
+
+  backend "remote" {
+    organization = "EastHealth"
+
+    workspaces {
+      name = "gh-actions"
     }
   }
 }
