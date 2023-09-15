@@ -1,27 +1,50 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+flowchart TB
+db_prod[(EAST_HEALTH_PROD)]
+db_test[(EAST_HEALTH_TEST)]
+db_dev_jc[(EAST_HEALTH_DEV_JC)]
+db_dev_jj[(EAST_HEALTH_DEV_JJ)]
+db_dev_mg[(EAST_HEALTH_DEV_MG)]
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+node_prod(fa:fa-spinner)
+node_test(fa:fa-spinner)
+node_dev_jc(fa:fa-spinner)
+node_dev_jj(fa:fa-spinner)
+node_dev_mg(fa:fa-spinner)
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+db_prod-->node_prod
+db_test-->node_test
+db_dev_jc-->node_dev_jc
+db_dev_jj-->node_dev_jj
+db_dev_mg-->node_dev_mg
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+subgraph schemas
+    direction TB
+    
+    model[/Model or Mart/]
+    stage[/Stage/]
+    ws_fact{{Wherescape Fact}}
+    ws_dim{{Wherescape Dim}}
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+    raw[/Landing/]
+    ods[/ODS/]
+    
+    ws_ods{{Wherescape ODS}}
+    ws_load{{Wherescape Load}}
 
-```mermaid
-sequenceDiagram
-    Christie->>Josh: Hello Josh, how are you?
-    Josh-->>Christie: Great!
-    Christie->>Josh: See you later!
-```
+    raw -...-> ws_load
+
+    ws_stage{{Wherescape Stage}}
+    stage -...-> ws_stage
+    ods -...-> ws_ods
+
+    model -...-> ws_fact
+    model -...-> ws_dim
+end
+
+node_prod --> schemas
+node_test --> schemas
+node_dev_jc --> schemas
+node_dev_jj --> schemas
+node_dev_mg --> schemas
+
+
