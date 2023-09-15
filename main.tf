@@ -1,4 +1,14 @@
 terraform {
+  cloud {
+    organization = "EastHealth"
+
+    workspaces {
+      name = "gh-actions"
+    }
+  }
+}
+
+terraform {
   required_providers {
     snowflake = {
       source  = "Snowflake-Labs/snowflake"
