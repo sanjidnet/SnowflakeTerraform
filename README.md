@@ -1,3 +1,4 @@
+```mermaid
 flowchart TB
 db_prod[(EAST_HEALTH_PROD)]
 db_test[(EAST_HEALTH_TEST)]
@@ -46,5 +47,6 @@ node_test --> schemas
 node_dev_jc --> schemas
 node_dev_jj --> schemas
 node_dev_mg --> schemas
+```
 
 
